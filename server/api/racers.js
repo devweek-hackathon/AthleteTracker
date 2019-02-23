@@ -4,15 +4,25 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await Racer.findAll({
+    const racers = await Racer.findAll({
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       attributes: ['id', 'email']
     })
-    res.json(users)
+    res.json(racers)
   } catch (err) {
     next(err)
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  try {
+    const {email} = req.body
+    const newRacer = await Racer.create({email})
+    res.json(newRacer)
+  } catch (error) {
+    next(error)
   }
 })
 
