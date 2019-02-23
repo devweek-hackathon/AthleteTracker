@@ -1,19 +1,18 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Racer = db.define('racer', {
-  email: {
+const Checkpoint = db.define('checkpoint', {
+  name: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
   },
-  docusignURL: {
+  tomtomID: {
     type: Sequelize.STRING
   },
-  paid: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
+  orderInRace: {
+    type: Sequelize.INTEGER
   }
 })
 
-module.exports = Racer
+module.exports = Checkpoint
