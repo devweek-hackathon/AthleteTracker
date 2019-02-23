@@ -3,6 +3,6 @@
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-export { default as Navbar } from './Navbar'
-export { default as AdminDash } from './AdminDash'
-export { Login, Signup } from './AuthForm'
+export { default as Navbar } from './Navbar';
+export { default as Racers } from './Racers';
+export { default as previews } from './previews';
