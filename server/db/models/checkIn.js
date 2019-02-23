@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const RaceStatus = db.define('raceStatus', {
+const CheckIn = db.define('checkIn', {
   userId: {
     type: Sequelize.INTEGER
   },
@@ -13,4 +13,4 @@ const RaceStatus = db.define('raceStatus', {
   }
 })
 
-module.exports = RaceStatus
+module.exports = CheckIn

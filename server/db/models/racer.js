@@ -7,12 +7,30 @@ const Racer = db.define('racer', {
     unique: true,
     allowNull: false
   },
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   docusignURL: {
     type: Sequelize.STRING
   },
-  paid: {
+  signatureCoords: {
+    type: Sequelize.ARRAY(Sequelize.FLOAT)
+  },
+  waiverSigned: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  feePaid: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  tomtomDeviceId: {
+    type: Sequelize.STRING
   }
 })
 

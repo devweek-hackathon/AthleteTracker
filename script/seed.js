@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Racer, Checkpoint} = require('../server/db/models')
+const {User, Race, Racer, Checkpoint} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -12,12 +12,32 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'}),
     User.create({email: 'dev@dev.com', password: 'password'})
   ])
-
   console.log(`seeded ${users.length} users`)
 
+  const races = await Promise.all([
+    Race.create({name: 'Race1', date: '02/28/2019'}),
+    Race.create({name: 'Race2', date: '03/14/2019'})
+  ])
+  console.log(`seeded ${races.length} races`)
+
+  const checkpoints = await Promise.all([
+    Checkpoint.create({tomtomId: '1'}),
+    Checkpoint.create({tomtomId: '2'}),
+    Checkpoint.create({tomtomId: '3'})
+  ])
+  console.log(`seeded ${checkpoints.length} checkpoints`)
+
   const racers = await Promise.all([
-    Racer.create({email: 'racer1@gmail.com'}),
-    Racer.create({email: 'racer2@gmail.com'})
+    Racer.create({
+      email: 'racer1@gmail.com',
+      firstName: 'Bob',
+      lastName: 'Dole'
+    }),
+    Racer.create({
+      email: 'racer2@gmail.com',
+      firstName: 'Maya',
+      lastName: 'Gold'
+    })
   ])
   console.log(`seeded ${racers.length} racers`)
 
