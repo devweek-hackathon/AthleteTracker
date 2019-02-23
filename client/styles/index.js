@@ -1,4 +1,4 @@
 import colors from './colors'
-import mediaQueries from './mediaQueries'
+import media from './mediaQueries'
 
-export {colors, mediaQueries}
+export { colors, media }
