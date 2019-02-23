@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email} = props
+export const AdminDash = props => {
+  const { email } = props
 
   return (
     <div>
@@ -24,11 +24,11 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(AdminDash)
 
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
+AdminDash.propTypes = {
   email: PropTypes.string
 }
