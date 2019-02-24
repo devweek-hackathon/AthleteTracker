@@ -26,6 +26,18 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.put('/:racerId', async (req, res, next) => {
+  try {
+    const racer = await Racer.findById(req.params.racerId)
+    const updatedRacer = await racer.update({
+      currentLocation: req.body.currentLocation
+    })
+    res.json(updatedRacer)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get('/:racerId', async (req, res, next) => {
   try {
     const racer = await Racer.findById(Number(req.params.racerId))
