@@ -15,15 +15,9 @@ const Racer = db.define('racer', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  docusignURL: {
-    type: Sequelize.STRING
-  },
-  signatureCoords: {
-    type: Sequelize.ARRAY(Sequelize.FLOAT)
-  },
-  waiverSigned: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
+  waiver: {
+    type: Sequelize.JSON,
+    defaultValue: {signed: false, docUrl: ''}
   },
   feePaid: {
     type: Sequelize.BOOLEAN,

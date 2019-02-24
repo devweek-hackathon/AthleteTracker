@@ -2,7 +2,14 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Login, Signup, AdminDash, RacerProfile } from './pages';
+import {
+  Login,
+  Signup,
+  AdminDash,
+  RacerProfile,
+  Races,
+  Race,
+} from './pages';
 import {me} from './store'
 
 /**
@@ -14,7 +21,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const { isLoggedIn } = this.props
 
     return (
       <Switch>
@@ -26,6 +33,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/dashboard" component={ AdminDash } />
             <Route path="/racers/:id" component={ RacerProfile } />
+            <Route path="/races" component={ Races } />
+            <Route path="/race" component={ Race } />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

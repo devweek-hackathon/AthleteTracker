@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Navbar } from './components'
 import Routes from './routes'
+import {Grid} from 'semantic-ui-react';
 
 const express = require('express')
     , passport = require('passport')
@@ -119,7 +120,16 @@ if (clientID === '06172041-3746-49d1-8e07-f7b448b31aa8') {
   return (
     <div>
       <Navbar />
-      <Routes />
+      <Grid centered>
+        <Grid.Column
+          mobile={14}
+          tablet={12}
+          computer={10}
+          largeScreen={10}
+        >
+          <Routes />
+        </Grid.Column>
+      </Grid>
     </div>
   )
 }
