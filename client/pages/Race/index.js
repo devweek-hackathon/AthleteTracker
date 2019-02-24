@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Section, Title } from '../../styledComponents';
+import { StopWatch } from '../../components';
 
 class Race extends Component {
   constructor(props) {
@@ -24,12 +25,17 @@ class Race extends Component {
           <Title>{ raceStarted ? "Current Race" : "Race Details" }</Title>
         </Section>
         <Section>
+          {raceStarted ? 
+            <StopWatch />
+            :
+
           <button 
-            type="button"
-            onClick={this.startRace}
+          type="button"
+          onClick={this.startRace}
           >
-          {raceStarted ? "End Race" : "Start Race"}
+            Start Race
           </button>
+          }
         </Section>
       </Fragment>
     )
