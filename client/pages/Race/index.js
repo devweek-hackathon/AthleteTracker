@@ -71,7 +71,6 @@ class Race extends Component {
   }
 
   startRace() {
-    debugger
     const {race} = this.props
     raceData.map(gpsPing => {
       const {lat, lng, racerId, timeEntered} = gpsPing
@@ -124,7 +123,6 @@ class Race extends Component {
   }
 
   stopRace() {
-    debugger
     console.log('Called Clear Interval')
     clearInterval(this.interval)
     this.setState({
@@ -161,14 +159,12 @@ class Race extends Component {
               <Header>{raceUpdates}</Header>
               <Button onClick={() => this.updateRaceData()}>Update</Button> 
             </Grid.Row>} */}
-            <Grid.Row centered>
+            { raceStarted && <Grid.Row centered>
               <Grid.Column>
-                {/* <StopWatch 
-                  running={this.state.running}
-                  stopTimer={this.stopRace}
-                /> */}
+                <StopWatch 
+                />
               </Grid.Column>
-            </Grid.Row>
+            </Grid.Row>}
             <Grid.Row columns={2}>
               <Grid.Column>
                 <RaceData
