@@ -16,8 +16,6 @@ class Race extends Component {
       raceStarted: false,
       raceUpdates: 0
     }
-    _now = 0
-    _timer = null
   }
 
   async componentDidMount() {
@@ -145,10 +143,12 @@ class Race extends Component {
                 <Map 
                   app_id="d05D2l6CCqaPWnkWjYMJ"
                   app_code="md9XSoYBLPDA-aBPmvA4qg"
-                  lat="42.345978"
-                  lng="-83.0405"
-                  zoom="12"
+                  lat="37.812223"
+                  lng="-122.48784"
+                  zoom="11"
                   theme="normal.day"
+                  checkpoints={checkPointData}
+                  raceStarted={raceStarted}
                 />
               </Grid.Column>
             </Grid.Row>
