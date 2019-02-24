@@ -9,7 +9,9 @@ class Races extends Component {
     super(props);
     this.state = {
       races: [],
-      selectedRace: null,
+      selectedRace: {
+        id: 1,
+      }
     }
   }
   
@@ -46,26 +48,32 @@ class Races extends Component {
     if (races) {
       console.log(races)
       return (
-        <Fragment>
+        <Grid centered>
           <Grid.Row>
             <Header>Races</Header>
           </Grid.Row>
           <Grid.Row>
-            <Dropdown
-              placeholder='Select a Race' 
-              search 
-              fluid
-              selection
-              options={races}
-              onChange={this.handleChange}
-            />
+            <Grid.Column 
+              mobile={14}
+              tablet={12}
+              computer={10}
+            >
+              <Dropdown
+                placeholder='Select a Race' 
+                search 
+                fluid
+                selection
+                options={races}
+                onChange={this.handleChange}
+              />
+            </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             { selectedRace && 
               <Race race={selectedRace}/>
             }
           </Grid.Row>
-        </Fragment>
+        </Grid>
       )
     }
     return (

@@ -9,60 +9,20 @@ const Button = (props) => (
 )
   
 
-class StopWatch extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      secondsElapsed: 0, 
-      lastClearedIncrementer: null
-    };
-    this.incrementer = null;
-    this.handleStartClick = this.handleStartClick.bind(this);
-    this.handleStopClick = this.handleStopClick.bind(this);
-    this.handleResetClick = this.handleResetClick.bind(this);
-  }  
-    
-  handleStartClick() {
-    this.incrementer = setInterval( () => (
-      this.setState( prevState => ({
-        secondsElapsed: prevState.secondsElapsed + 1
-      })), 1000)
-    )
-  }
-  
-  handleStopClick() {
-    clearInterval(this.incrementer);
-    this.setState({
-      lastClearedIncrementer: this.incrementer
-    });
-  }
-  
-  handleResetClick() {
-    clearInterval(this.incrementer);
-    this.setState({
-      secondsElapsed: 0,
-    });
-  }
-  
-  handleLabClick() {
-    this.setState( prevState => ({
-      laps: prevState.laps.concat([prevState.secondsElapsed])
-    }))
-  }
-  
+class StopWatch extends React.Component {   
   render() {
-    const {secondsElapsed, lastClearedIncrementer } = this.state;
+    const {timeElapsed, lastClearedIncrementer, incrementer, startTimer, stopTimer, resetTimer } = this.props;
     return (
       <div className="stopwatch">
-        <h1 className="stopwatch-timer">{formattedSeconds(secondsElapsed)}</h1>
-        {(secondsElapsed === 0 ||
-          this.incrementer === lastClearedIncrementer
-          ? <Button className="start-btn" onClick={this.handleStartClick}>Start Timer</Button>
-          : <Button className="stop-btn" onClick={this.handleStopClick}>Stop Timer</Button>
+        <h1 className="stopwatch-timer">{formattedSeconds(timeElapsed)}</h1>
+        {(timeElapsed === 0 ||
+          incrementer === lastClearedIncrementer
+          ? <Button className="start-btn" onClick={() => startTimer()}>Start Timer</Button>
+          : <Button className="stop-btn" onClick={() => stopTimer()}>Stop Timer</Button>
         )}
 
-        {(secondsElapsed !== 0 && this.incrementer === lastClearedIncrementer
-          ? <Button onClick={this.handleResetClick}>Reset Timer</Button>
+        {(timeElapsed !== 0 && incrementer === lastClearedIncrementer
+          ? <Button onClick={() => resetTimer()}>Reset Timer</Button>
           : null
         )}
       </div>
