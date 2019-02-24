@@ -1,51 +1,52 @@
 import React, { Component, Fragment } from 'react';
 import { Section, Title } from '../../styledComponents';
-import { StopWatch, RaceData } from '../../components';
+import { RaceData } from '../../components';
+import axios from 'axios';
 
 class Race extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      raceStarted: false,
-      checkPoints: [],
+      checkPointData: [],
+      totalRacers: null,
+      title: '',
     };
-    this.startRace = this.startRace.bind(this);
+  }
+
+  componentDidMount() {
+    this.getInitialRaceData();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { raceStarted, checkPoints } = this.state
-    if (raceStarted) {
-      
+    if (prevProps.race.id !== this.props.race.id){
+      this.getInitialRaceData()
     }
   }
 
-  startRace() {
-    this.setState(prevState => (
-      {raceStarted: !prevState.raceStarted}
-    ))
+  getInitialRaceData = async () => {
+    const { race } = this.props;
+    const raceName = await axios.get(`/api/races/${race.id}`)
+    const racerRes = await axios.get('/api/racers')
+    const res = await axios.get(`/api/races/${race.id}/checkpoints`)
+
+    this.setState({ 
+      checkPointData: res.data,
+      totalRacers: racerRes.data.length,
+      title: raceName.data.name,
+    })
   }
-  
+
   render() {
-    const { raceStarted } = this.state;
+    const { totalRacers, checkPointData, title } = this.state;
+    console.log("Checkpoint Data", checkPointData)
     return (
       <Fragment>
         <Section>
-          <Title>{ raceStarted ? "Current Race" : "Race Details" }</Title>
-        </Section>
-        <Section>
-          {raceStarted ? 
-            <StopWatch />
-            :
-          <button 
-          type="button"
-          onClick={this.startRace}
-          >
-            Start Race
-          </button>
-          }
-        </Section>
-        <Section>
-          <RaceData />
+          <RaceData
+            totalRacers={totalRacers}
+            checkpointData={checkPointData}
+            raceName={title}
+          />
         </Section>
       </Fragment>
     )
