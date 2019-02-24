@@ -2,6 +2,8 @@
 
 const axios = require('axios');
 
+const ttCredentials = require('../secrets.js')
+
 // report API takes a 
 //curl -v -XGET -H 'https://api.tomtom.com/geofencing/1/report/projectId?key=4a12f120-214c-4933-b461-d028cc646ec4&point=-122.806789,38.068793,0&object=object&range=range'
 
@@ -131,11 +133,11 @@ const reqData = {
 
 async function getGeofenceStatus() {
   try {
-    const response = await axios.get('https://api.tomtom.com/geofencing/1/report/4a12f120-214c-4933-b461-d028cc646ec4/?point=-122.806789%2C38.068793&range=100&key=iqShTYBkTokAoZWkpg738rSzKBWMPmAz');
+    const response = await axios.get(`https://api.tomtom.com/geofencing/1/report/${ttCredentials.geofencingProjectId}/?point=-122.806789%2C38.068793&range=100&key=${ttCredentials.apiKey}`);
     console.log(JSON.stringify(response.data));
   } catch (error) {
     console.error(error);
   }
 }
-
+console.log(ttCredentials)
 getGeofenceStatus();
