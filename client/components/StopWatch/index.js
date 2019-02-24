@@ -44,7 +44,7 @@ class StopWatch extends Component {
   render() {
     return (
       <div style={{textAlign: 'center'}}>
-        <label style={{fontSize: '20px', display: 'block'}} data-test="ms">{this.state.lapse}ms</label>
+        <label style={{fontSize: '20px', display: 'block'}} data-test="s">{this.state.lapse}s</label>
         <Button onClick={this.handleRunClick} data-test="toggle">{this.state.running ? 'Stop' : 'Start'}</Button>
         <Button  onClick={this.handleClearClick} data-test="clear">Clear Timer</Button>
       </div>

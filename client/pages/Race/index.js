@@ -15,8 +15,12 @@ class Race extends Component {
       title: '',
       raceStarted: false,
       raceUpdates: 0,
-      newPoint: {}
+      newPoint: {},
+      running: false,
+      lapse: 0
     }
+    // _now = 0
+    // _timer = null
   }
 
   async componentDidMount() {
@@ -90,6 +94,33 @@ class Race extends Component {
     this.setState({
       raceStarted: true
     })
+
+    this.handleRunClick()
+  }
+
+  handleRunClick = () => {
+    if (this.state.running) {
+      this.stop()
+    } else {
+      this.start()
+    }
+  }
+
+  startTimer() {
+    this._timer = setInterval(() => {
+      this.setState({
+        lapse: Date.now() - this._now
+      })
+    }, 1)
+
+    this._now = Date.now() - this.state.lapse
+    this.setState({running: true})
+  }
+
+  stopTimer() {
+    clearInterval(this._timer)
+    this._timer = null
+    this.setState({running: false})
   }
 
   stopRace() {
@@ -130,11 +161,13 @@ class Race extends Component {
               <Header>{raceUpdates}</Header>
               <Button onClick={() => this.updateRaceData()}>Update</Button>
             </Grid.Row>} */}
-            <Grid.Row centered>
-              <Grid.Column>
-                <StopWatch />
-              </Grid.Column>
-            </Grid.Row>
+            {raceStarted && (
+              <Grid.Row centered>
+                <Grid.Column>
+                  <StopWatch />
+                </Grid.Column>
+              </Grid.Row>
+            )}
             <Grid.Row columns={2}>
               <Grid.Column>
                 <RaceData
@@ -148,7 +181,7 @@ class Race extends Component {
                   app_code="md9XSoYBLPDA-aBPmvA4qg"
                   lat="37.812223"
                   lng="-122.48784"
-                  zoom="11"
+                  zoom="10"
                   theme="normal.day"
                   checkpoints={checkPointData}
                   raceStarted={raceStarted}
