@@ -1,33 +1,55 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react'
+import { Button } from 'semantic-ui-react';
 
-const formattedSeconds = (sec) => (
-  Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2)
-)
+class StopWatch extends Component {
+  state = {
+    running: false,
+    lapse: 0,
+  }
 
-const Button = (props) => (
-  <button type="button" {...props} className={"btn " + props.className } />
-)
-  
+  _now = 0
+  _timer = null
 
-class StopWatch extends React.Component {   
+  handleRunClick = () => {
+    if (this.state.running) {
+      this.stop()
+    } else {
+      this.start()
+    }
+  }
+
+  handleClearClick = () => {
+    this.stop()
+    this._now = 0
+    this.setState({lapse: 0})
+  }
+
+  start() {
+    this._timer = setInterval(() => {
+      this.setState({
+        lapse: Date.now() - this._now,
+      })
+    }, 1)
+
+    this._now = Date.now() - this.state.lapse
+    this.setState({running: true})
+  }
+
+  stop() {
+    clearInterval(this._timer)
+    this._timer = null
+    this.setState({running: false})
+  }
+
   render() {
-    const {timeElapsed, lastClearedIncrementer, incrementer, startTimer, stopTimer, resetTimer } = this.props;
     return (
-      <div className="stopwatch">
-        <h1 className="stopwatch-timer">{formattedSeconds(timeElapsed)}</h1>
-        {(timeElapsed === 0 ||
-          incrementer === lastClearedIncrementer
-          ? <Button className="start-btn" onClick={() => startTimer()}>Start Timer</Button>
-          : <Button className="stop-btn" onClick={() => stopTimer()}>Stop Timer</Button>
-        )}
-
-        {(timeElapsed !== 0 && incrementer === lastClearedIncrementer
-          ? <Button onClick={() => resetTimer()}>Reset Timer</Button>
-          : null
-        )}
+      <div style={{textAlign: 'center'}}>
+        <label style={{fontSize: '20px', display: 'block'}} data-test="ms">{this.state.lapse}ms</label>
+        <Button onClick={this.handleRunClick} data-test="toggle">{this.state.running ? 'Stop' : 'Start'}</Button>
+        <Button  onClick={this.handleClearClick} data-test="clear">Clear Timer</Button>
       </div>
-    );
+    )
   }
 }
 
-export default StopWatch;
+export default StopWatch

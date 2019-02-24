@@ -4,6 +4,7 @@ import { RaceData, Map } from '../../components';
 import axios from 'axios';
 import { Grid, Header, Button } from 'semantic-ui-react';
 import {raceData} from './raceData'
+import StopWatch from '../../components/StopWatch';
 
 class Race extends Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class Race extends Component {
       raceStarted: false,
       raceUpdates: 0
     }
+    _now = 0
+    _timer = null
   }
 
   async componentDidMount() {
@@ -126,6 +129,11 @@ class Race extends Component {
               <Header>{raceUpdates}</Header>
               <Button onClick={() => this.updateRaceData()}>Update</Button> 
             </Grid.Row>} */}
+            <Grid.Row centered>
+              <Grid.Column>
+                <StopWatch />
+              </Grid.Column>
+            </Grid.Row>
             <Grid.Row columns={2}>
               <Grid.Column>
                 <RaceData
