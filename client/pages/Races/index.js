@@ -1,50 +1,48 @@
-import React, { Fragment, Component } from 'react';
-import axios from 'axios';
-import { Dropdown, Grid, Header } from 'semantic-ui-react';
-import { Loader, Section } from '../../styledComponents';
-import Race from '../Race';
+import React, {Fragment, Component} from 'react'
+import axios from 'axios'
+import {Dropdown, Grid, Header} from 'semantic-ui-react'
+import {Loader, Section} from '../../styledComponents'
+import Race from '../Race'
 
 class Races extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       races: [],
       selectedRace: {
-        id: 1,
+        id: 1
       }
     }
   }
-  
+
   componentDidMount() {
-    this.getRaces();
+    this.getRaces()
   }
 
-  componentDidUpdate
+  // componentDidUpdate
 
-  getRaces = async() => {
+  getRaces = async () => {
     const res = await axios.get('/api/races')
-    const raceOptions = res.data.map(race => (
-      { 
-        key: race.id, 
-        value: race.id,
-        text: race.name,
-      }
-    ))
+    const raceOptions = res.data.map(race => ({
+      key: race.id,
+      value: race.id,
+      text: race.name
+    }))
     this.setState({
       races: [...raceOptions]
     })
   }
 
-  handleChange = (e, { value }) => {
-    this.setState({ 
+  handleChange = (e, {value}) => {
+    this.setState({
       selectedRace: {
-        id: value,
-      },
+        id: value
+      }
     })
-  };
+  }
 
   render() {
-    const { races, selectedRace } = this.state;
+    const {races, selectedRace} = this.state
     if (races) {
       console.log(races)
       return (
@@ -53,14 +51,10 @@ class Races extends Component {
             <Header>Races</Header>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Column 
-              mobile={14}
-              tablet={12}
-              computer={10}
-            >
+            <Grid.Column mobile={14} tablet={12} computer={10}>
               <Dropdown
-                placeholder='Select a Race' 
-                search 
+                placeholder="Select a Race"
+                search
                 fluid
                 selection
                 options={races}
@@ -68,11 +62,7 @@ class Races extends Component {
               />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
-            { selectedRace && 
-              <Race race={selectedRace}/>
-            }
-          </Grid.Row>
+          <Grid.Row>{selectedRace && <Race race={selectedRace} />}</Grid.Row>
         </Grid>
       )
     }
@@ -84,4 +74,4 @@ class Races extends Component {
   }
 }
 
-export default Races;
+export default Races

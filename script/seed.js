@@ -36,14 +36,29 @@ async function seed() {
 
   const racers = await Promise.all([
     Racer.create({
-      email: 'racer1@gmail.com',
+      email: 'bobdolerunsforstuff@gmail.com',
       firstName: 'Bob',
       lastName: 'Dole'
     }),
     Racer.create({
-      email: 'racer2@gmail.com',
-      firstName: 'Maya',
-      lastName: 'Gold'
+      email: 'ghostrider@gmail.com',
+      firstName: 'Nic',
+      lastName: 'Cage'
+    }),
+    Racer.create({
+      email: 'flushedwithcash@gmail.com',
+      firstName: 'Jean-Ralphio',
+      lastName: 'Saperstein'
+    }),
+    Racer.create({
+      email: 'bikerdude@gmail.com',
+      firstName: 'Fast',
+      lastName: 'Biker'
+    }),
+    Racer.create({
+      email: 'bayareabiker@gmail.com',
+      firstName: 'Gofor',
+      lastName: 'Thegold'
     })
   ])
   console.log(`seeded ${racers.length} racers`)
