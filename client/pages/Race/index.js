@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
-import { Section } from '../../styledComponents';
-import { RaceData, Map } from '../../components';
-import axios from 'axios';
-import { Grid, Header, Button } from 'semantic-ui-react';
+import React, {Component, Fragment} from 'react'
+import {Section} from '../../styledComponents'
+import {RaceData, Map} from '../../components'
+import axios from 'axios'
+import {Grid, Header, Button} from 'semantic-ui-react'
 import {raceData} from './raceData'
-import StopWatch from '../../components/StopWatch';
+import StopWatch from '../../components/StopWatch'
 
 class Race extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ class Race extends Component {
       totalRacers: null,
       title: '',
       raceStarted: false,
-      raceUpdates: 0
+      raceUpdates: 0,
+      newPoint: {}
     }
   }
 
@@ -63,7 +64,6 @@ class Race extends Component {
       checkPointData: res.data,
       raceUpdates: prevState.raceUpdates + 1
     }))
-    
   }
 
   startRace() {
@@ -83,6 +83,7 @@ class Race extends Component {
       setTimeout(async () => {
         await axios.post('/api/tomtom/racerUpdate', raceUpdateData)
         await this.updateRaceData()
+        this.setState({newPoint: {lat, lng, racerId, radius: 10}})
         await axios.put(`/api/racers/${racerId}`, {currentLocation: {lat, lng}})
       }, gpsPing.timeEntered)
     })
@@ -108,7 +109,8 @@ class Race extends Component {
       checkPointData,
       title,
       raceStarted,
-      raceUpdates
+      raceUpdates,
+      newPoint
     } = this.state
     return (
       <Fragment>
@@ -126,7 +128,7 @@ class Race extends Component {
             </Grid.Row>
             {/* {raceStarted && <Grid.Row>
               <Header>{raceUpdates}</Header>
-              <Button onClick={() => this.updateRaceData()}>Update</Button> 
+              <Button onClick={() => this.updateRaceData()}>Update</Button>
             </Grid.Row>} */}
             <Grid.Row centered>
               <Grid.Column>
@@ -141,7 +143,7 @@ class Race extends Component {
                 />
               </Grid.Column>
               <Grid.Column>
-                <Map 
+                <Map
                   app_id="d05D2l6CCqaPWnkWjYMJ"
                   app_code="md9XSoYBLPDA-aBPmvA4qg"
                   lat="37.812223"
@@ -150,6 +152,7 @@ class Race extends Component {
                   theme="normal.day"
                   checkpoints={checkPointData}
                   raceStarted={raceStarted}
+                  newPoint={newPoint}
                 />
               </Grid.Column>
             </Grid.Row>

@@ -35,13 +35,13 @@ async function seed() {
       radius: 100
     }),
     Checkpoint.create({
-      name: 'Cataract Falls',
+      name: 'Point Reyes',
       lat: 37.942246,
       lng: -122.648119,
       radius: 100
     }),
     Checkpoint.create({
-      name: 'Point Reyes',
+      name: 'Cataract Falls',
       lat: 38.076121,
       lng: -122.798683,
       radius: 100
