@@ -1,36 +1,78 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { auth } from '../../store'
+import { Grid, Container, Header, Button, Checkbox, Form } from 'semantic-ui-react'
+import { Link, withRouter } from 'react-router-dom'
+
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
-  const { name, displayName, handleSubmit, error } = props
-
+  const { name, displayName, handleSubmit, error, match } = props
   return (
-    <div>
-      <form onSubmit={ handleSubmit } name={ name }>
-        <div>
+    <Grid centered>
+      <Grid.Row centered>
+        <Container text>
+          <Header>Welcome!</Header>
+          <Header as="h3">{match.path === "/login" ? "Login" : "Sign up"}</Header>
+        </Container>
+      </Grid.Row>
+      <Grid.Row centered>
+        <Grid.Column
+          mobile={14}
+          tablet={12}
+          desktop={10}
+          textAlign="center"
+        >
+        <Form onSubmit={ handleSubmit } name={ name }>
+        <Form.Field>
           <label htmlFor="email">
             <small>Email</small>
           </label>
           <input name="email" type="text" />
-        </div>
-        <div>
+        </Form.Field>
+        <Form.Field>
           <label htmlFor="password">
             <small>Password</small>
           </label>
           <input name="password" type="password" />
-        </div>
+        </Form.Field>
         <div>
-          <button type="submit">{displayName}</button>
+          <Button type="submit">{match.path === "/login" ? "Login" : "Sign up"}</Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      {/* <a href="/auth/google">{displayName} with Google</a> */}
-    </div>
+      </Form>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row centered>
+        <Grid.Column
+          textAlign="center"
+        >
+        {
+          match.path === "/login" ?
+          <Fragment>
+            <Header as="h4">Need an Account?</Header>
+          <Link to="/register">
+            <Button>
+              Sign up
+            </Button>
+          </Link>
+          </Fragment>
+      :
+      <Fragment>
+      <Header as="h4">Already have an Account?</Header>
+            <Link to="/login">
+          <Button>
+            Login
+          </Button>
+          </Link>
+        </Fragment>
+        }
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   )
 }
 
