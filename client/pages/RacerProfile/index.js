@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+// import pdf from '../../../public/'
+// import image from './image.png';
 
 class RacerProfile extends React.Component {
   constructor(props) {
@@ -25,7 +27,8 @@ class RacerProfile extends React.Component {
       <div>
         <p>{racer.firstName}</p>
         <p>{racer.lastName}</p>
-        <iframe src="http://localhost:8080/3A0A4696-EF27-44A3-B237-AD025BD0FCB7.pdf" width="800px" height="2100px" />
+        <img src='http://localhost:8080/image.png' />
+        {/* <iframe src={pdf} width="auto" height="auto" /> */}
 
       </div>
     )
