@@ -4,16 +4,7 @@ const axios = require('axios');
 
 const ttCredentials = require('../secrets.js')
 
-// report API takes a 
-//curl -v -XGET -H 'https://api.tomtom.com/geofencing/1/report/projectId?key=4a12f120-214c-4933-b461-d028cc646ec4&point=-122.806789,38.068793,0&object=object&range=range'
-
-//-122.806789 38.068793
-
-// To show a point in relation to geofenced area
-//https://api.tomtom.com/geofencing/1/report/4a12f120-214c-4933-b461-d028cc646ec4/?point=-122.806789%2C38.068793&range=5000&key=iqShTYBkTokAoZWkpg738rSzKBWMPmAz  
-
-
-// Stub out ride data
+// Stubbed out ride data
 // make api call for each lat/long
 // tomtom returns in fence for each location
 
@@ -125,19 +116,31 @@ const sample3 = [
 ]
 
 const reqData = {
-    athlete: '5',
+    athlete: 'INEEEDTHIS',
     lat: '38.068793',
     lng: '-122.806789',
     time: 'middle'
 }
 
-async function getGeofenceStatus() {
+const allRacers = [];
+
+async function getGeofenceStatus(racer) {
   try {
-    const response = await axios.get(`https://api.tomtom.com/geofencing/1/report/${ttCredentials.geofencingProjectId}/?point=-122.806789%2C38.068793&range=100&key=${ttCredentials.apiKey}`);
-    console.log(JSON.stringify(response.data));
+    const response = await axios.get(`https://api.tomtom.com/geofencing/1/report/${ttCredentials.geofencingProjectId}/?point=${racer.lng}%2C${racer.lat}&range=100&&key=${ttCredentials.apiKey}`);
+    allRacers.push({...response.data, ...racer});
+    console.log(allRacers)
   } catch (error) {
     console.error(error);
   }
 }
+
+const getAllRacers = (racers) => {
+  Promise.all(racers.map((racer) => {
+    return getGeofenceStatus(racer)
+  })).then(console.log(allRacers))
+
+}
+
 console.log(ttCredentials)
-getGeofenceStatus();
+// getGeofenceStatus(reqData);
+getAllRacers(sample2);
