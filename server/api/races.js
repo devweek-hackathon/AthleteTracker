@@ -25,7 +25,20 @@ router.get('/:raceId/checkpoints', async (req, res, next) => {
     const raceCheckpoints = await RaceCheckpoint.findAll({
       where: {raceId: req.params.raceId}
     })
-    res.json(raceCheckpoints)
+
+    const checkpointData = await Promise.all(
+      raceCheckpoints.map(async raceCheckpoint => {
+        const checkedInRacers = await CheckIn.findAll({
+          where: {
+            raceId: req.params.raceId,
+            raceCheckpointId: raceCheckpoint.id
+          }
+        })
+        return {raceCheckpoint, racers: checkedInRacers}
+      })
+    )
+
+    res.json(checkpointData)
   } catch (error) {
     next(error)
   }
