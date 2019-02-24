@@ -3,22 +3,50 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Section, Title } from '../../styledComponents';
 import { Racers } from '../../components';
-import { racers } from '../../tempData';
+import axios from 'axios';
 
 /**
  * COMPONENT
  */
-export const AdminDash = () => {
-  return (
-    <Fragment>
-      <Section>
-        <Title>Admin Dash</Title>
-      </Section>
-      <Section noPad>
-        <Racers racers={racers} />
-      </Section>
-    </Fragment>
-  )
+class AdminDash extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      racers: [],
+    }
+  }
+
+  componentDidMount() {
+    this.getRacers();
+  }
+  
+  getRacers = async () => {
+    const res = await axios.get('/api/racers')
+    console.log(res.data)
+    this.setState({racers: [...res.data]})
+  }
+
+  render () {
+    const { racers } = this.state;
+    if (racers) {
+      console.log(racers)
+      return (
+        <Fragment>
+          <Section>
+            <Title>Admin Dash</Title>
+          </Section>
+          <Section noPad>
+            <Racers racers={racers} />
+          </Section>
+        </Fragment>
+      )
+    }
+    return (
+      <div>
+        Loading
+      </div>
+    )
+  }
 }
 
 /**
