@@ -1,14 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import { Section, Title } from '../../styledComponents';
-import { StopWatch } from '../../components';
+import { StopWatch, RaceData } from '../../components';
 
 class Race extends Component {
   constructor(props) {
     super(props);
     this.state = {
       raceStarted: false,
+      checkPoints: [],
     };
     this.startRace = this.startRace.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { raceStarted, checkPoints } = this.state
+    if (raceStarted) {
+      
+    }
   }
 
   startRace() {
@@ -28,7 +36,6 @@ class Race extends Component {
           {raceStarted ? 
             <StopWatch />
             :
-
           <button 
           type="button"
           onClick={this.startRace}
@@ -36,6 +43,9 @@ class Race extends Component {
             Start Race
           </button>
           }
+        </Section>
+        <Section>
+          <RaceData />
         </Section>
       </Fragment>
     )

@@ -7,3 +7,4 @@ export { default as Navbar } from './Navbar';
 export { default as Racers } from './Racers';
 export { default as previews } from './previews';
 export { default as StopWatch } from './StopWatch';
+export { default as RaceData } from './RaceData';
