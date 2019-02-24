@@ -62,27 +62,27 @@ async function seed() {
   ])
   console.log(`seeded ${raceCheckpoints.length} race checkpoints`)
 
-  const checkIns = await Promise.all([
-    CheckIn.create({
-      raceId: 1,
-      racerId: 1,
-      raceCheckpointId: 1,
-      timeEntered: '02/28/2019 13:35:00'
-    }),
-    CheckIn.create({
-      raceId: 1,
-      racerId: 1,
-      raceCheckpointId: 2,
-      timeEntered: '02/28/2019 14:03:00'
-    }),
-    CheckIn.create({
-      raceId: 1,
-      racerId: 2,
-      raceCheckpointId: 1,
-      timeEntered: '02/28/2019 13:25:00'
-    })
-  ])
-  console.log(`seeded ${checkIns.length} check-ins`)
+  // const checkIns = await Promise.all([
+  //   CheckIn.create({
+  //     raceId: 1,
+  //     racerId: 1,
+  //     raceCheckpointId: 1,
+  //     timeEntered: '02/28/2019 13:35:00'
+  //   }),
+  //   CheckIn.create({
+  //     raceId: 1,
+  //     racerId: 1,
+  //     raceCheckpointId: 2,
+  //     timeEntered: '02/28/2019 14:03:00'
+  //   }),
+  //   CheckIn.create({
+  //     raceId: 1,
+  //     racerId: 2,
+  //     raceCheckpointId: 1,
+  //     timeEntered: '02/28/2019 13:25:00'
+  //   })
+  // ])
+  // console.log(`seeded ${checkIns.length} check-ins`)
 
   console.log(`seeded successfully`)
 }
