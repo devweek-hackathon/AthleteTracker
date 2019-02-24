@@ -18,12 +18,37 @@ class AdminDash extends React.Component {
 
   componentDidMount() {
     this.getRacers()
+    this.getSigner()
   }
 
   getRacers = async () => {
     const res = await axios.get('/api/racers')
     console.log(res.data)
     this.setState({racers: [...res.data]})
+  }
+
+  getSigner = async () => {
+    const res = await axios.get('/api/docusign')
+    console.log('docusign: ', res.data.signers);
+    let result = res.data.signers;
+    console.log('result: ', result);
+    let newSigner = []
+    for (let i = 0; i < result.length; i++) {
+      let currentSigner = result[i] 
+      newSigner.push({
+        id: i + 1,
+        firstName: currentSigner['name'].split(' ')[0],
+        lastName: currentSigner['name'].split(' ')[1],
+        feePaid: currentSigner['status'],
+        email: currentSigner['email'],
+        waiver: {
+          docUrl: '',
+          signed: currentSigner['status'],
+        }
+      })
+    }
+    console.log('newSigner: ', newSigner);
+    this.setState({racers: [...newSigner]})
   }
 
   render() {

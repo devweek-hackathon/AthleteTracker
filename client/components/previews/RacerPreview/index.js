@@ -6,8 +6,10 @@ import { withRouter } from 'react-router-dom';
 const RacerPreview = withRouter(({ id, firstName, lastName, feePaid, waiver, history}) => (
   <RacerContainer onClick={() => history.push(`/racers/${id}`)}>
     <td>{firstName} {lastName}</td>
-    <td>{feePaid ? "Paid" : "Not Paid"}</td>
-    <td>{waiver.signed ? "Waiver Signed" : "No Waiver"}</td>
+    <td>{feePaid === "completed" ? "Paid" : "Not Paid"}</td>
+    {/* <td>{waiver.signed ? "Waiver Signed" : "No Waiver"}</td> */}
+    <td>{waiver.signed}</td>
+
   </RacerContainer>
 ))
 
