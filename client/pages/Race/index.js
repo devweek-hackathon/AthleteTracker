@@ -1,48 +1,59 @@
-import React, { Component, Fragment } from 'react';
-import { Section, Title } from '../../styledComponents';
-import { StopWatch, RaceData } from '../../components';
+import React, {Component, Fragment} from 'react'
+import {Section, Title} from '../../styledComponents'
+import {StopWatch, RaceData} from '../../components'
+import {raceData} from './raceData'
+import axios from 'axios'
 
 class Race extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       raceStarted: false,
-      checkPoints: [],
-    };
-    this.startRace = this.startRace.bind(this);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { raceStarted, checkPoints } = this.state
-    if (raceStarted) {
-      
+      checkPoints: []
     }
+    this.startRace = this.startRace.bind(this)
   }
 
-  startRace() {
-    this.setState(prevState => (
-      {raceStarted: !prevState.raceStarted}
-    ))
+  // componentDidUpdate(prevProps, prevState) {
+  //   const { raceStarted, checkPoints } = this.state
+
+  // }
+
+  async startRace() {
+    raceData.map(gpsPing => {
+      const {lat, lng, racerId, timeEntered} = gpsPing
+      const datetimeEntered = new Date(
+        new Date().getTime() + timeEntered * 60000
+      )
+      const raceUpdateData = {
+        lat,
+        lng,
+        racerId,
+        raceId: 1,
+        timeEntered: datetimeEntered
+      }
+      setTimeout(() => {
+        axios.post('/api/tomtom/racerUpdate', raceUpdateData)
+      }, gpsPing.timeEntered)
+    })
+    this.setState(prevState => ({raceStarted: !prevState.raceStarted}))
   }
-  
+
   render() {
-    const { raceStarted } = this.state;
+    const {raceStarted} = this.state
     return (
       <Fragment>
         <Section>
-          <Title>{ raceStarted ? "Current Race" : "Race Details" }</Title>
+          <Title>{raceStarted ? 'Current Race' : 'Race Details'}</Title>
         </Section>
         <Section>
-          {raceStarted ? 
+          {raceStarted ? (
             <StopWatch />
-            :
-          <button 
-          type="button"
-          onClick={this.startRace}
-          >
-            Start Race
-          </button>
-          }
+          ) : (
+            <button type="button" onClick={this.startRace}>
+              Start Race
+            </button>
+          )}
         </Section>
         <Section>
           <RaceData />
@@ -50,6 +61,6 @@ class Race extends Component {
       </Fragment>
     )
   }
-};
+}
 
-export default Race;
+export default Race
