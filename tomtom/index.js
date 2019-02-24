@@ -26,7 +26,7 @@ const sample1 = [
     time: 'start'
   },
   {
-    athlete: '',
+    athlete: '2',
     lat: '37.808790',
     lng: '-122.475836',
     time: 'start'
@@ -90,7 +90,7 @@ const sample3 = [
     time: 'finish'
   },
   {
-    athlete: '',
+    athlete: '2',
     lat: '38.068793',
     lng: '-122.806789',
     time: 'finish'
