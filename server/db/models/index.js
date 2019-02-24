@@ -12,6 +12,9 @@ const Race = require('./race')
 CheckIn.belongsTo(Race)
 Race.hasMany(CheckIn)
 
+Racer.belongsToMany(Checkpoint, {through: CheckIn})
+Checkpoint.belongsToMany(Racer, {through: CheckIn})
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'

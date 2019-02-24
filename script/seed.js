@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Race, Racer, Checkpoint} = require('../server/db/models')
+const {User, Race, Racer, Checkpoint, CheckIn} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -40,6 +40,27 @@ async function seed() {
     })
   ])
   console.log(`seeded ${racers.length} racers`)
+
+  const checkIns = await Promise.all([
+    CheckIn.create({
+      raceId: 1,
+      racerId: 1,
+      checkpointId: 1,
+      timeEntered: '02/28/2019 13:35:00'
+    }),
+    CheckIn.create({
+      raceId: 1,
+      racerId: 1,
+      checkpointId: 3,
+      timeEntered: '02/28/2019 14:03:00'
+    }),
+    CheckIn.create({
+      raceId: 1,
+      racerId: 2,
+      checkpointId: 1,
+      timeEntered: '02/28/2019 13:25:00'
+    })
+  ])
 
   console.log(`seeded successfully`)
 }
