@@ -61,6 +61,7 @@ class Race extends Component {
       checkPointData: res.data,
       raceUpdates: prevState.raceUpdates + 1,
     }))
+    
   }
 
   startRace = () => {
@@ -104,10 +105,10 @@ class Race extends Component {
               <Button onClick={() => this.startRace()}>Start Race</Button>
             }
             </Grid.Row>
-            {raceStarted && <Grid.Row>
+            {/* {raceStarted && <Grid.Row>
               <Header>{raceUpdates}</Header>
               <Button onClick={() => this.updateRaceData()}>Update</Button> 
-            </Grid.Row>}
+            </Grid.Row>} */}
             <Grid.Row columns={2}>
               <Grid.Column>
                 <RaceData
