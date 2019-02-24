@@ -1,33 +1,33 @@
-import React, { Fragment } from 'react'
+import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Section, Title } from '../../styledComponents';
-import { Racers } from '../../components';
-import axios from 'axios';
+import {connect} from 'react-redux'
+import {Section, Title} from '../../styledComponents'
+import {Racers} from '../../components'
+import axios from 'axios'
 
 /**
  * COMPONENT
  */
 class AdminDash extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      racers: [],
+      racers: []
     }
   }
 
   componentDidMount() {
-    this.getRacers();
+    this.getRacers()
   }
-  
+
   getRacers = async () => {
     const res = await axios.get('/api/racers')
     console.log(res.data)
     this.setState({racers: [...res.data]})
   }
 
-  render () {
-    const { racers } = this.state;
+  render() {
+    const {racers} = this.state
     if (racers) {
       console.log(racers)
       return (
@@ -41,11 +41,7 @@ class AdminDash extends React.Component {
         </Fragment>
       )
     }
-    return (
-      <div>
-        Loading
-      </div>
-    )
+    return <div>Loading</div>
   }
 }
 
