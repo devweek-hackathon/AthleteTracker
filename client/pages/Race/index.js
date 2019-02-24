@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Section } from '../../styledComponents';
-import { RaceData } from '../../components';
+import { RaceData, Map } from '../../components';
 import axios from 'axios';
 import { Grid, Header, Button } from 'semantic-ui-react';
 
@@ -17,6 +17,7 @@ class Race extends Component {
   }
 
   componentDidMount() {
+    console.log(process.env.HERE_APP_ID)
     this.getInitialRaceData();
   }
 
@@ -112,6 +113,16 @@ class Race extends Component {
                 <RaceData
                   totalRacers={totalRacers}
                   checkpointData={checkPointData}
+                />
+              </Grid.Column>
+              <Grid.Column>
+                <Map 
+                  app_id="d05D2l6CCqaPWnkWjYMJ"
+                  app_code="md9XSoYBLPDA-aBPmvA4qg"
+                  lat="42.345978"
+                  lng="-83.0405"
+                  zoom="12"
+                  theme="normal.day"
                 />
               </Grid.Column>
             </Grid.Row>
