@@ -15,6 +15,7 @@ class RaceData extends React.Component {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Check Point</Table.HeaderCell>
+              <Table.HeaderCell>Check Name</Table.HeaderCell>
               <Table.HeaderCell>Racers Passed</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -24,20 +25,8 @@ class RaceData extends React.Component {
               return (
                 <Table.Row key={index}>
                   <Table.Cell>{checkPoint.raceCheckpoint.id}</Table.Cell>
-                  <Table.Cell>
-                    <Link
-                      to={{
-                        pathname: `/checkpoints/:${
-                          checkPoint.raceCheckpoint.id
-                        }`,
-                        state: {
-                          fromNotifications: true
-                        }
-                      }}
-                    >
-                      {checkPoint.racers.length}
-                    </Link>
-                  </Table.Cell>
+                  <Table.Cell>{checkPoint.checkpointData.name}</Table.Cell>
+                  <Table.Cell>{checkPoint.racers.length}</Table.Cell>
                 </Table.Row>
               )
             })}

@@ -1,9 +1,10 @@
-import React, {Component, Fragment} from 'react'
-import {Section} from '../../styledComponents'
-import {RaceData} from '../../components'
-import axios from 'axios'
+import React, { Component, Fragment } from 'react';
+import { Section } from '../../styledComponents';
+import { RaceData, Map } from '../../components';
+import axios from 'axios';
+import { Grid, Header, Button } from 'semantic-ui-react';
 import {raceData} from './raceData'
-import {Grid, Header, Button} from 'semantic-ui-react'
+import StopWatch from '../../components/StopWatch';
 
 class Race extends Component {
   constructor(props) {
@@ -62,6 +63,7 @@ class Race extends Component {
       checkPointData: res.data,
       raceUpdates: prevState.raceUpdates + 1
     }))
+    
   }
 
   startRace() {
@@ -122,17 +124,32 @@ class Race extends Component {
                 <Button onClick={() => this.startRace()}>Start Race</Button>
               )}
             </Grid.Row>
-            {raceStarted && (
-              <Grid.Row>
-                <Header>{raceUpdates}</Header>
-                <Button onClick={() => this.updateRaceData()}>Update</Button>
-              </Grid.Row>
-            )}
+            {/* {raceStarted && <Grid.Row>
+              <Header>{raceUpdates}</Header>
+              <Button onClick={() => this.updateRaceData()}>Update</Button> 
+            </Grid.Row>} */}
+            <Grid.Row centered>
+              <Grid.Column>
+                <StopWatch />
+              </Grid.Column>
+            </Grid.Row>
             <Grid.Row columns={2}>
               <Grid.Column>
                 <RaceData
                   totalRacers={totalRacers}
                   checkpointData={checkPointData}
+                />
+              </Grid.Column>
+              <Grid.Column>
+                <Map 
+                  app_id="d05D2l6CCqaPWnkWjYMJ"
+                  app_code="md9XSoYBLPDA-aBPmvA4qg"
+                  lat="37.812223"
+                  lng="-122.48784"
+                  zoom="11"
+                  theme="normal.day"
+                  checkpoints={checkPointData}
+                  raceStarted={raceStarted}
                 />
               </Grid.Column>
             </Grid.Row>
