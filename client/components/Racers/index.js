@@ -4,7 +4,6 @@ import { SubTitle } from '../../styledComponents';
 import { RacerTable, RacerHead, RacerBody } from './styles';
 
 const Racers = ({ racers }) => {
-  console.log(racers)
   return (
     <div>
       <SubTitle>Registered Racers</SubTitle>
