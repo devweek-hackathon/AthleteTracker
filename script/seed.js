@@ -28,9 +28,24 @@ async function seed() {
   console.log(`seeded ${races.length} races`)
 
   const checkpoints = await Promise.all([
-    Checkpoint.create({tomtomId: '1'}),
-    Checkpoint.create({tomtomId: '2'}),
-    Checkpoint.create({tomtomId: '3'})
+    Checkpoint.create({
+      name: 'Presidio',
+      lat: 37.812223,
+      lng: -122.48784,
+      radius: 100
+    }),
+    Checkpoint.create({
+      name: 'Cataract Falls',
+      lat: 37.942246,
+      lng: -122.648119,
+      radius: 100
+    }),
+    Checkpoint.create({
+      name: 'Point Reyes',
+      lat: 38.076121,
+      lng: -122.798683,
+      radius: 100
+    })
   ])
   console.log(`seeded ${checkpoints.length} checkpoints`)
 
@@ -73,6 +88,11 @@ async function seed() {
       raceId: 1,
       checkpointId: 2,
       index: 1
+    }),
+    RaceCheckpoint.create({
+      raceId: 1,
+      checkpointId: 3,
+      index: 2
     })
   ])
   console.log(`seeded ${raceCheckpoints.length} race checkpoints`)
