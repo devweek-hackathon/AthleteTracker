@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Race, RaceCheckpoint, CheckIn} = require('../db/models')
+const {Race, RaceCheckpoint, Checkpoint, CheckIn} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -25,16 +25,18 @@ router.get('/:raceId/checkpoints', async (req, res, next) => {
     const raceCheckpoints = await RaceCheckpoint.findAll({
       where: {raceId: req.params.raceId}
     })
-
     const checkpointData = await Promise.all(
       raceCheckpoints.map(async raceCheckpoint => {
+        const checkpointData = await Checkpoint.findOne({
+          where: {id: raceCheckpoint.checkpointId}
+        })
         const checkedInRacers = await CheckIn.findAll({
           where: {
             raceId: req.params.raceId,
             raceCheckpointId: raceCheckpoint.id
           }
         })
-        return {raceCheckpoint, racers: checkedInRacers}
+        return {raceCheckpoint, checkpointData, racers: checkedInRacers}
       })
     )
 
