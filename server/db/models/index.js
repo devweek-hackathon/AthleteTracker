@@ -3,6 +3,7 @@ const Racer = require('./racer')
 const Checkpoint = require('./checkpoint')
 const CheckIn = require('./checkIn')
 const Race = require('./race')
+const RaceCheckpoint = require('./raceCheckpoint')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -12,8 +13,11 @@ const Race = require('./race')
 CheckIn.belongsTo(Race)
 Race.hasMany(CheckIn)
 
-Racer.belongsToMany(Checkpoint, {through: CheckIn})
-Checkpoint.belongsToMany(Racer, {through: CheckIn})
+Race.belongsToMany(Checkpoint, {through: RaceCheckpoint})
+Checkpoint.belongsToMany(Race, {through: RaceCheckpoint})
+
+Racer.belongsToMany(RaceCheckpoint, {through: CheckIn})
+RaceCheckpoint.belongsToMany(Racer, {through: CheckIn})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -25,6 +29,7 @@ module.exports = {
   User,
   Racer,
   Checkpoint,
+  RaceCheckpoint,
   CheckIn,
   Race
 }
