@@ -1,26 +1,17 @@
 import React, { Fragment } from 'react';
-import { Grid, Header, Table } from 'semantic-ui-react';
-import StopWatch from '../StopWatch';
+import { Grid, Table } from 'semantic-ui-react';
 
 class RaceData extends React.Component {
 
   render() {
-   const  { raceName, totalRacers, checkpointData } = this.props;
+   const  { totalRacers, checkpointData } = this.props;
   console.log("Checkpoint data from RaceData", checkpointData)
   return (
-    <Grid centered stackable>
-      <Grid.Row>
-        <Header>{raceName}</Header>
-      </Grid.Row>
-      <Grid.Row columns={2}>
-        <Grid.Column verticalAlign="middle">
-          <StopWatch />
-        </Grid.Column>
         <Grid.Column>
           <Grid.Row>
             <p>Total Racers: {totalRacers}</p>
           </Grid.Row>
-            <Table>
+            <Table unstackable>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Check Point</Table.HeaderCell>
@@ -41,11 +32,7 @@ class RaceData extends React.Component {
               }
           </Table.Body>
             </Table>
-          <Grid.Row>
-          </Grid.Row>
         </Grid.Column>
-      </Grid.Row>
-    </Grid>
   )
 }
 }
