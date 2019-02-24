@@ -25,6 +25,10 @@ const Racer = db.define('racer', {
   },
   tomtomDeviceId: {
     type: Sequelize.STRING
+  },
+  currentLocation: {
+    type: Sequelize.JSON,
+    defaultValue: {lat: 37.794529, lng: -122.462604}
   }
 })
 

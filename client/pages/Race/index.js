@@ -88,6 +88,7 @@ class Race extends Component {
       setTimeout(async () => {
         await axios.post('/api/tomtom/racerUpdate', raceUpdateData)
         await this.updateRaceData()
+        await axios.put(`/api/racers/${racerId}`, {currentLocation: {lat, lng}})
       }, gpsPing.timeEntered)
     })
     this.setState({
