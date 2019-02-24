@@ -25,6 +25,8 @@ class RacerProfile extends React.Component {
       <div>
         <p>{racer.firstName}</p>
         <p>{racer.lastName}</p>
+        <embed src="http://localhost:8080/3A0A4696-EF27-44A3-B237-AD025BD0FCB7.pdf" width="800px" height="2100px" />
+
       </div>
     )
   }
