@@ -19,7 +19,7 @@ export const raceData = [
   {racerId: 3, lat: 37.97383, lng: -122.612598, timeEntered: 8600},
   {racerId: 4, lat: 37.964382, lng: -122.62701, timeEntered: 9000},
   {racerId: 5, lat: 37.94495, lng: -122.633341, timeEntered: 10000},
-  {racerId: 1, lat: 37.937077, lng: -122.638413, timeEntered: 11000},
+  {racerId: 1, lat: 37.938674, lng: -122.638299, timeEntered: 11000},
   {racerId: 2, lat: 37.938038, lng: -122.638347, timeEntered: 12000},
   {racerId: 3, lat: 37.938038, lng: -122.638347, timeEntered: 12500},
   {racerId: 4, lat: 37.938038, lng: -122.638347, timeEntered: 13000},

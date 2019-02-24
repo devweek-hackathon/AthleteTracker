@@ -20,16 +20,17 @@ class RaceData extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {checkpointData.map((checkPoint, index) => {
-              console.log('Checkpoint', checkPoint)
-              return (
-                <Table.Row key={index}>
-                  <Table.Cell>{checkPoint.raceCheckpoint.id}</Table.Cell>
-                  <Table.Cell>{checkPoint.checkpointData.name}</Table.Cell>
-                  <Table.Cell>{checkPoint.racers.length}</Table.Cell>
-                </Table.Row>
-              )
-            })}
+            {checkpointData
+              .sort((a, b) => a.raceCheckpoint.index - b.raceCheckpoint.index)
+              .map((checkPoint, index) => {
+                return (
+                  <Table.Row key={checkPoint.raceCheckpoint.index}>
+                    <Table.Cell>{checkPoint.raceCheckpoint.index}</Table.Cell>
+                    <Table.Cell>{checkPoint.checkpointData.name}</Table.Cell>
+                    <Table.Cell>{checkPoint.racers.length}</Table.Cell>
+                  </Table.Row>
+                )
+              })}
           </Table.Body>
         </Table>
       </Grid.Column>

@@ -94,17 +94,15 @@ class Race extends Component {
     this.setState({
       raceStarted: true
     })
-
-    this.handleRunClick()
   }
 
-  handleRunClick = () => {
-    if (this.state.running) {
-      this.stop()
-    } else {
-      this.start()
-    }
-  }
+  // handleRunClick = () => {
+  //   if (this.state.running) {
+  //     this.stop()
+  //   } else {
+  //     this.start()
+  //   }
+  // }
 
   startTimer() {
     this._timer = setInterval(() => {
